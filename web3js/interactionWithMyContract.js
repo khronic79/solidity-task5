@@ -101,34 +101,21 @@ const exchangeContract = new web3.eth.Contract(
 );
 
 // Инициализация контракта USDC
-const usdc = new web3.eth.Contract(ERC20ABI, process.env.USDC_ADDRESS);
+const usdc = new web3.eth.Contract(ERC20ABI, process.env.USDC_CONTRACT_ADDRESS);
 
 async function main() {
   try {
     
+    console.log('Выдача разрешения на трансфер...');
     // Выдача разрешения контракту на трансфер USDC
-    await usdc.methods.approve(process.env.EXCHANGE_CONTRACT_ADDRESS, amount)
+    await usdc.methods.approve(process.env.EXCHANGE_CONTRACT_ADDRESS, '10000000')
       .send({ from: account.address });
     
-
+    console.log('Старт обмена...');
     // Выполнение обмена
-    const tx = await exchangeContract.methods.exchangeUsdcForDai(amount)
+    const tx = await exchangeContract.methods.exchangeUsdcForDai('10000000')
       .send({ from: account.address });
     
-    // Подписка на события обмена
-    exchangeContract.events.Exchange({
-      fromBlock: 'latest'
-    })
-    .on('data', event => {
-      console.log(`
-        New exchange:
-        From: ${event.returnValues.fromToken} (${web3.utils.fromWei(event.returnValues.fromAmount, 'mwei')})
-        To: ${event.returnValues.toToken} (${web3.utils.fromWei(event.returnValues.toAmount, 'ether')})
-        By: ${event.returnValues.user}
-      `);
-    })
-    .on('error', console.error);
-
   } catch (error) {
     console.error('Error:', error.message);
   }

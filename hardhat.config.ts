@@ -27,6 +27,11 @@ const config: HardhatUserConfig = {
       sepolia: process.env.ETHERSCAN_API_KEY,
     },
   },
+  gasReporter: {
+    enabled: true,
+    // outputFile: 'gas-report.txt',
+    // noColors: true, // Отключить цвета, если вы хотите отправить отчет в файл.
+},
 } as HardhatUserConfig;
 
 export default config;
