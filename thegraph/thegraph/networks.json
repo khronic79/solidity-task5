@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "UsdcDaiTokensExchange": {
+      "address": "0x85d37b1868667d0b35878f11c2417fc84d5bfe74",
+      "startBlock": 8221772
+    }
+  }
+}

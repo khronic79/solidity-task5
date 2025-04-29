@@ -1,0 +1,37 @@
+type ContractPausedEvent @entity(immutable: true) {
+  id: Bytes!
+  paused: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Exchange @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  fromToken: Bytes! # address
+  fromAmount: BigInt! # uint256
+  toToken: Bytes! # address
+  toAmount: BigInt! # uint256
+  feeAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FeeUpdated @entity(immutable: true) {
+  id: Bytes!
+  newFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
